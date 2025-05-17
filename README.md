@@ -220,9 +220,10 @@ go run main.go
 
 ## 许可证
 
-MIT
+GPL-3.0 license
+个人使用免费，商业使用请联系作者授权QQ:5553557
 
 ## 联系方式
 
-- 项目维护者：[Your Name](mailto:your.email@example.com)
-- 项目主页：[GitHub Repository](https://github.com/yourusername/domainweb)
+- 项目维护者：[Your Name](mailto:5553557@qq.com)
+- 项目主页：[GitHub Repository](https://github.com/aqzt/domainweb)
