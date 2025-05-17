@@ -225,5 +225,5 @@ GPL-3.0 license
 
 ## 联系方式
 
-- 项目维护者：[Your Name](mailto:5553557@qq.com)
+- 项目维护者：[5553557@qq.com](mailto:5553557@qq.com)
 - 项目主页：[GitHub Repository](https://github.com/aqzt/domainweb)
