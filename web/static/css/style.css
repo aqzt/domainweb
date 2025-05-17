@@ -1,0 +1,34 @@
+/* 自定义样式 */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.display-6 {
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+footer {
+    padding: 20px 0;
+    border-top: 1px solid #e9ecef;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .border-end {
+        border-right: none !important;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+}

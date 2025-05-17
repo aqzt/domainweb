@@ -1,0 +1,27 @@
+{
+    "server": {
+        "port": 8080,
+        "host": "0.0.0.0",
+        "readTimeout": 10,
+        "writeTimeout": 10,
+        "maxHeaderBytes": 1048576
+    },
+    "database": {
+        "driver": "mysql",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "test",
+        "password": "test",
+        "dbname": "domainweb",
+        "charset": "utf8mb4",
+        "parseTime": true,
+        "maxOpenConns": 10,
+        "maxIdleConns": 5,
+        "connMaxLifetime": 3600
+    },
+    "estimation": {
+        "basePrice": 25.0,
+        "baseGrade": -0.5,
+        "defaultHistoryLimit": 50
+    }
+}

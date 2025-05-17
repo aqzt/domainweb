@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="text-center my-4">
+            <h1>域名估价结果</h1>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h4 mb-0">估价摘要</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center border-end">
+                                <h3 class="h5">域名</h3>
+                                <p class="display-6">{{ .result.Domain }}</p>
+                            </div>
+                            <div class="col-md-4 text-center border-end">
+                                <h3 class="h5">品相等级</h3>
+                                <p class="display-6">{{ printf "%.1f" .result.Grade }}</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h3 class="h5">保守估价</h3>
+                                <p class="display-6">￥{{ printf "%.0f" .result.Price }}元</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h2 class="h4 mb-0">详细说明</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="h5 mb-3">基础属性:</h3>
+                        <ul class="list-group mb-4">
+                            {{ range .result.BaseAttributes }}
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>{{ .Description }}</span>
+                                    <span>
+                                        估价 ×{{ printf "%.2f" .PriceFactor }}，
+                                        等级 {{ if gt .GradeFactor 0.0 }}+{{ end }}{{ printf "%.2f" .GradeFactor }}
+                                    </span>
+                                </div>
+                            </li>
+                            {{ end }}
+                        </ul>
+
+                        <h3 class="h5 mb-3">其他属性:</h3>
+                        <div class="accordion mb-4" id="otherAttributesAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingMarket">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseMarket" aria-expanded="true"
+                                        aria-controls="collapseMarket">
+                                        市场指标
+                                    </button>
+                                </h2>
+                                <div id="collapseMarket" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingMarket" data-bs-parent="#otherAttributesAccordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="list-group list-group-flush">
+                                            {{ range .result.OtherAttributes }}
+                                            {{ if or (contains .Description "Alexa") (contains .Description "搜索量")
+                                            (contains .Description "贴吧") (contains .Description "百科") (contains
+                                            .Description "词典") (contains .Description "搜索指数") }}
+                                            <li class="list-group-item">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span>{{ .Description }}</span>
+                                                    <span>
+                                                        估价 ×{{ printf "%.2f" .PriceFactor }}，
+                                                        等级 {{ if gt .GradeFactor 0.0 }}+{{ end }}{{ printf "%.2f"
+                                                        .GradeFactor }}
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            {{ end }}
+                                            {{ end }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingRelated">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseRelated" aria-expanded="false"
+                                        aria-controls="collapseRelated">
+                                        相关域名
+                                    </button>
+                                </h2>
+                                <div id="collapseRelated" class="accordion-collapse collapse"
+                                    aria-labelledby="headingRelated" data-bs-parent="#otherAttributesAccordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="list-group list-group-flush">
+                                            {{ range .result.OtherAttributes }}
+                                            {{ if contains .Description "." }}
+                                            <li class="list-group-item">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span>{{ .Description }}</span>
+                                                    <span>
+                                                        估价 ×{{ printf "%.2f" .PriceFactor }}，
+                                                        等级 {{ if gt .GradeFactor 0.0 }}+{{ end }}{{ printf "%.2f"
+                                                        .GradeFactor }}
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            {{ end }}
+                                            {{ end }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingCommerce">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseCommerce" aria-expanded="false"
+                                        aria-controls="collapseCommerce">
+                                        商业价值
+                                    </button>
+                                </h2>
+                                <div id="collapseCommerce" class="accordion-collapse collapse"
+                                    aria-labelledby="headingCommerce" data-bs-parent="#otherAttributesAccordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="list-group list-group-flush">
+                                            {{ range .result.OtherAttributes }}
+                                            {{ if or (contains .Description "传媒") (contains .Description "社交") (contains
+                                            .Description "淘宝") }}
+                                            <li class="list-group-item">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span>{{ .Description }}</span>
+                                                    <span>
+                                                        估价 ×{{ printf "%.2f" .PriceFactor }}，
+                                                        等级 {{ if gt .GradeFactor 0.0 }}+{{ end }}{{ printf "%.2f"
+                                                        .GradeFactor }}
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            {{ end }}
+                                            {{ end }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOther">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOther" aria-expanded="false"
+                                        aria-controls="collapseOther">
+                                        其他因素
+                                    </button>
+                                </h2>
+                                <div id="collapseOther" class="accordion-collapse collapse"
+                                    aria-labelledby="headingOther" data-bs-parent="#otherAttributesAccordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="list-group list-group-flush">
+                                            {{ range .result.OtherAttributes }}
+                                            {{ if and (not (contains .Description "Alexa")) (not (contains .Description
+                                            "搜索量")) (not (contains .Description "贴吧")) (not (contains .Description
+                                            "百科")) (not (contains .Description "词典")) (not (contains .Description
+                                            "搜索指数")) (not (contains .Description ".")) (not (contains .Description
+                                            "传媒")) (not (contains .Description "社交")) (not (contains .Description "淘宝"))
+                                            }}
+                                            <li class="list-group-item">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span>{{ .Description }}</span>
+                                                    <span>
+                                                        估价 ×{{ printf "%.2f" .PriceFactor }}，
+                                                        等级 {{ if gt .GradeFactor 0.0 }}+{{ end }}{{ printf "%.2f"
+                                                        .GradeFactor }}
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            {{ end }}
+                                            {{ end }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ if eq (len .result.OtherAttributes) 0 }}
+                        <div class="alert alert-info">
+                            无其他属性数据
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="/" class="btn btn-primary">返回首页</a>
+                    <a href="/history" class="btn btn-outline-secondary">查看历史记录</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-5 text-center text-muted">
+            <p>域名估价系统 &copy; 2023</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

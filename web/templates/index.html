@@ -1,0 +1,64 @@
+<!--
+ * @Author: 5553557@qq.com
+ * @Date: 2025-05-10 14:07:51
+ * @LastEditors: 5553557@qq.com
+ * @LastEditTime: 2025-05-10 16:05:21
+ * @FilePath: \domainweb\web\templates\index.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by 5553557@qq.com, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="text-center my-5">
+            <h1>域名估价系统</h1>
+            <p class="lead">输入域名，获取专业估价和品相等级</p>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form action="/estimate" method="POST">
+                            <div class="mb-3">
+                                <label for="domain" class="form-label">域名</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="domain" name="domain"
+                                        placeholder="例如: aqzt.com" required>
+                                    <button type="submit" class="btn btn-primary">查询</button>
+                                </div>
+                                <div class="form-text">请输入您想要估价的域名，无需添加http://或https://前缀</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-8 text-center">
+                <a href="/history" class="btn btn-outline-secondary">查看历史记录</a>
+            </div>
+        </div>
+
+        <footer class="mt-5 text-center text-muted">
+            <p>域名估价系统 &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
